@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import TVGuide from './components/TVGuide';
 import ChannelTable from './components/ChannelTable';
 import { useChannels } from './hooks/useChannels';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 
 interface Channel {
   id: string;
@@ -17,12 +17,6 @@ function App() {
   const { channels, loading, error } = useChannels();
   const [currentStream, setCurrentStream] = useState<Channel | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-
-  useEffect(() => {
-    if (channels.length > 0 && !currentStream) {
-      setCurrentStream(channels[0]);
-    }
-  }, [channels, currentStream]);
 
   const handleChannelSelect = (channel: Channel) => {
     setCurrentStream(channel);
@@ -51,10 +45,6 @@ function App() {
 
   if (error) {
     return <div>Error: {error}</div>;
-  }
-
-  if (!currentStream) {
-    return <div>Loading player...</div>
   }
 
   return (

@@ -11,7 +11,7 @@ interface Channel {
 }
 
 interface TVGuideProps {
-  currentChannel: Channel;
+  currentChannel: Channel | null;
   channels: Channel[];
   onChannelSelect: (channel: Channel) => void;
 }
@@ -19,11 +19,17 @@ interface TVGuideProps {
 const TVGuide = ({ currentChannel, channels, onChannelSelect }: TVGuideProps) => {
   return (
     <div className="tv-guide">
-      <Player
-        url={currentChannel.url}
-        userAgent={currentChannel.user_agent}
-        referrer={currentChannel.referrer}
-      />
+      {currentChannel ? (
+        <Player
+          url={currentChannel.url}
+          userAgent={currentChannel.user_agent}
+          referrer={currentChannel.referrer}
+        />
+      ) : (
+        <div className="player-placeholder">
+          <h2>Select a channel to start watching</h2>
+        </div>
+      )}
       <ChannelList channels={channels} onChannelSelect={onChannelSelect} />
     </div>
   );

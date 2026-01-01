@@ -55,6 +55,17 @@ nav a {
   background-color: #000;
 }
 
+.player-placeholder {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
 .channel-list {
   width: 300px;
   height: 100%;
@@ -117,6 +128,20 @@ nav a {
   object-fit: contain;
 }
 
+.error-boundary {
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-boundary button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   nav {
@@ -134,7 +159,7 @@ nav a {
     height: auto;
   }
 
-  .player-wrapper {
+  .player-wrapper, .player-placeholder {
     height: 40vh;
     min-height: 250px;
   }

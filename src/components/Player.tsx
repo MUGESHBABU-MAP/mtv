@@ -1,4 +1,5 @@
 import ReactPlayer from 'react-player'
+import { toast } from 'react-toastify';
 
 interface PlayerProps {
   url: string;
@@ -17,6 +18,11 @@ const Player = ({ url, userAgent, referrer }: PlayerProps) => {
     },
   };
 
+  const handleError = (error: any) => {
+    console.error('Player Error:', error);
+    toast.error('Failed to load stream. It may be offline or geo-blocked.');
+  }
+
   return (
     <div className="player-wrapper">
       <ReactPlayer
@@ -27,6 +33,7 @@ const Player = ({ url, userAgent, referrer }: PlayerProps) => {
         playing
         controls
         config={config}
+        onError={handleError}
       />
     </div>
   )
