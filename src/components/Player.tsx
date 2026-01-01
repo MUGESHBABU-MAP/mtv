@@ -29,6 +29,8 @@ const Player = ({ url, userAgent, referrer }: PlayerProps) => {
   // due to browser security restrictions. While the 'referrer' property exists in the
   // iptv-org data, we cannot use it here. The browser will automatically set a
   // Referer header based on the document's referrer policy.
+  // Use the variable to avoid a TypeScript 'declared but never read' error.
+  void referrer;
 
   const handleError = (error: any) => {
     console.error('Player Error:', error);
