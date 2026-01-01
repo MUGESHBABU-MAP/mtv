@@ -1,12 +1,15 @@
 interface Channel {
+  id: string;
   name: string;
+  logo: string | null;
   url: string;
-  logo: string;
+  user_agent: string | null;
+  referrer: string | null;
 }
 
 interface ChannelListProps {
   channels: Channel[];
-  onChannelSelect: (url: string) => void;
+  onChannelSelect: (channel: Channel) => void;
 }
 
 const ChannelList = ({ channels, onChannelSelect }: ChannelListProps) => {
@@ -15,8 +18,8 @@ const ChannelList = ({ channels, onChannelSelect }: ChannelListProps) => {
       <h2>Channels</h2>
       <ul>
         {channels.map((channel) => (
-          <li key={channel.name} onClick={() => onChannelSelect(channel.url)}>
-            <img src={channel.logo} alt={channel.name} width="50" />
+          <li key={channel.id} onClick={() => onChannelSelect(channel)}>
+            {channel.logo && <img src={channel.logo} alt={channel.name} width="50" />}
             <span>{channel.name}</span>
           </li>
         ))}

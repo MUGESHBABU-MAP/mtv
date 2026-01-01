@@ -22,6 +22,8 @@ nav {
   gap: 1rem;
   padding: 1rem;
   background-color: #333;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -29,9 +31,19 @@ nav a {
   text-decoration: none;
 }
 
+.search-bar {
+  margin-left: auto;
+}
+
+.search-bar input {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
 .tv-guide {
   display: flex;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 120px);
 }
 
 .player-wrapper {
@@ -103,4 +115,75 @@ nav a {
   width: 50px;
   height: 50px;
   object-fit: contain;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .tv-guide {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .player-wrapper {
+    height: 40vh;
+    min-height: 250px;
+  }
+
+  .channel-list {
+    width: 100%;
+    height: calc(60vh - 120px);
+  }
+
+  .channel-table table,
+  .channel-table thead,
+  .channel-table tbody,
+  .channel-table th,
+  .channel-table td,
+  .channel-table tr {
+    display: block;
+  }
+
+  .channel-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .channel-table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+  }
+
+  .channel-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    display: flex;
+    align-items: center;
+  }
+
+  .channel-table td:before {
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    transform: translateY(-50%);
+  }
+
+  .channel-table td:nth-of-type(1):before { content: "Logo"; }
+  .channel-table td:nth-of-type(2):before { content: "Name"; }
+  .channel-table td:nth-of-type(3):before { content: "Action"; }
 }

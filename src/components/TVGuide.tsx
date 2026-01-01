@@ -2,21 +2,28 @@ import Player from './Player';
 import ChannelList from './ChannelList';
 
 interface Channel {
+  id: string;
   name: string;
+  logo: string | null;
   url: string;
-  logo: string;
+  user_agent: string | null;
+  referrer: string | null;
 }
 
 interface TVGuideProps {
-  currentUrl: string;
+  currentChannel: Channel;
   channels: Channel[];
-  onChannelSelect: (url: string) => void;
+  onChannelSelect: (channel: Channel) => void;
 }
 
-const TVGuide = ({ currentUrl, channels, onChannelSelect }: TVGuideProps) => {
+const TVGuide = ({ currentChannel, channels, onChannelSelect }: TVGuideProps) => {
   return (
     <div className="tv-guide">
-      <Player url={currentUrl} />
+      <Player
+        url={currentChannel.url}
+        userAgent={currentChannel.user_agent}
+        referrer={currentChannel.referrer}
+      />
       <ChannelList channels={channels} onChannelSelect={onChannelSelect} />
     </div>
   );

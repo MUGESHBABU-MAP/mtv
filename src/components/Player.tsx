@@ -2,9 +2,21 @@ import ReactPlayer from 'react-player'
 
 interface PlayerProps {
   url: string;
+  userAgent: string | null;
+  referrer: string | null;
 }
 
-const Player = ({ url }: PlayerProps) => {
+const Player = ({ url, userAgent, referrer }: PlayerProps) => {
+  const config = {
+    file: {
+      forceHLS: true,
+      attributes: {
+        ...(userAgent && { 'user-agent': userAgent }),
+        ...(referrer && { 'referrer': referrer }),
+      },
+    },
+  };
+
   return (
     <div className="player-wrapper">
       <ReactPlayer
@@ -14,6 +26,7 @@ const Player = ({ url }: PlayerProps) => {
         height="100%"
         playing
         controls
+        config={config}
       />
     </div>
   )
