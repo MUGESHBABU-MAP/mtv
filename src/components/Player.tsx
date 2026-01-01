@@ -8,15 +8,27 @@ interface PlayerProps {
 }
 
 const Player = ({ url, userAgent, referrer }: PlayerProps) => {
+  // The 'config' prop for ReactPlayer is passed to the underlying player library.
+  // For HLS streams (which we are forcing), this is hls.js.
   const config = {
     file: {
       forceHLS: true,
-      attributes: {
-        ...(userAgent && { 'user-agent': userAgent }),
-        ...(referrer && { 'referrer': referrer }),
+      hlsOptions: {
+        // We can use xhrSetup to modify the XHR object before the request is made.
+        // This allows us to set custom headers like User-Agent.
+        xhrSetup: (xhr: any) => {
+          if (userAgent) {
+            xhr.setRequestHeader('User-Agent', userAgent);
+          }
+        },
       },
     },
   };
+
+  // Note: The 'referrer' header cannot be set programmatically on XHR requests
+  // due to browser security restrictions. While the 'referrer' property exists in the
+  // iptv-org data, we cannot use it here. The browser will automatically set a
+  // Referer header based on the document's referrer policy.
 
   const handleError = (error: any) => {
     console.error('Player Error:', error);
