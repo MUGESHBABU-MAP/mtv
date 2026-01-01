@@ -20,7 +20,7 @@ const Player = ({ url, userAgent, referrer }: PlayerProps) => {
 
   const handleError = (error: any) => {
     console.error('Player Error:', error);
-    toast.error('Failed to load stream. It may be offline or geo-blocked.');
+    toast.error('Failed to load stream. This can happen if the stream is offline, geo-blocked, or has technical restrictions (CORS).');
   }
 
   return (

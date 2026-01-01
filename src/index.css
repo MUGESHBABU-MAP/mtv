@@ -46,9 +46,24 @@ nav a {
   height: calc(100vh - 120px);
 }
 
+.player-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .player-wrapper {
   flex-grow: 1;
-  height: 100%;
+  /* height is now controlled by player-container */
+}
+
+.player-note {
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #888;
+  background-color: #000;
 }
 
 .react-player {
@@ -159,9 +174,13 @@ nav a {
     height: auto;
   }
 
-  .player-wrapper, .player-placeholder {
+  .player-container {
     height: 40vh;
     min-height: 250px;
+  }
+  
+  .player-wrapper, .player-placeholder {
+    /* height is now controlled by player-container */
   }
 
   .channel-list {
